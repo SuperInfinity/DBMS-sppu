@@ -1,0 +1,51 @@
+CREATE TABLE Products (
+    Product_id INT PRIMARY KEY,
+    Product_Name VARCHAR(255) NOT NULL,
+    Product_Type VARCHAR(100) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (1, 'Apple iPhone 14', 'Electronics', 999.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (2, 'Samsung Galaxy S21', 'Electronics', 799.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (3, 'Sony WH-1000XM4', 'Electronics', 349.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (4, 'Nike Air Max 270', 'Footwear', 149.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (5, 'Dell XPS 13', 'Electronics', 1299.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (6, 'KitchenAid Mixer', 'Home Appliances', 349.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (7, 'The Great Gatsby', 'Books', 10.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (8, 'Lego Star Wars Set', 'Toys', 59.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (9, 'Adidas Ultraboost', 'Footwear', 179.99);
+INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (10, 'Philips Hue Bulb', 'Home Decor', 49.99);
+
+
+declare 
+	id int;
+	name varchar(20);
+	ptype varchar(20);
+	price number(10, 2);
+	cursor cuss(ptype varchar, a int, b int) is select * from Products where Product_Type = ptype and Price > a and Price < b;
+begin
+	open cuss('Electronics', 500, 1000); 
+	loop 
+		fetch cuss into id, name, ptype, price;
+		exit when cuss%notfound;
+	dbms_output.put_line('--> ' || id || ' n: ' || name || ' type: ' || ' price: ' || price);
+	end loop;
+	close cuss;
+end;
+
+declare 
+	id int;
+	name varchar(20);
+	ptype varchar(20);
+	price number(10, 2);
+	cursor cuss is select * from Products where Price > 500;
+begin
+	open cuss;
+	loop
+		fetch cuss into id, name, ptype, price;
+		exit when cuss%notfound;
+	dbms_output.put_line('--> ' || id || ' n: ' || name || ' type: ' || ' price: ' || price);
+	
+	end loop;
+	close cuss;
+end;
