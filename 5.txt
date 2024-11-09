@@ -1,0 +1,78 @@
+create table Employee(
+    id int primary key,
+    fname varchar(20),
+    lname varchar(20),
+    hire_date date,
+    salary number,
+    jobtitle varchar(20),
+    manager_id int,
+    dept_id int
+);
+
+create table Departments(
+    id int primary key,
+    name varchar(20),
+    manager_id int,
+    location_id int
+);
+
+create table Manager(
+    id int,
+    name varchar(20)
+);
+
+create table Locations(
+    id int primary key,
+    addr varchar(20),
+    postalcode varchar(20),
+    city varchar(20),
+    statee varchar(20),
+    country varchar(20)
+);
+
+INSERT INTO Employee VALUES (1, 'John', 'Doe', TO_DATE('2020-01-15', 'YYYY-MM-DD'), 60000, 'Software Engineer', 3, 1);
+INSERT INTO Employee VALUES (2, 'Jane', 'Smith', TO_DATE('2019-03-22', 'YYYY-MM-DD'), 75000, 'Project Manager', 1, 2);
+INSERT INTO Employee VALUES (3, 'Emily', 'Johnson', TO_DATE('2021-07-10', 'YYYY-MM-DD'), 50000, 'Data Analyst', 3, 1);
+INSERT INTO Employee VALUES (4, 'Michael', 'Brown', TO_DATE('2018-05-30', 'YYYY-MM-DD'), 90000, 'Senior Developer', 2, 2);
+INSERT INTO Employee VALUES (5, 'Sarah', 'Davis', TO_DATE('2022-11-01', 'YYYY-MM-DD'), 55000, 'HR Specialist', 1, 3)
+INSERT INTO Employee VALUES (6, 'Saraasdah', 'Ddaavis', TO_DATE('2022-11-01', 'YYYY-MM-DD'), 55000, 'HR Specialist', 1, 3);
+
+select * from Employee
+
+INSERT INTO Departments VALUES (1, 'IT', 2, 1);
+INSERT INTO Departments VALUES (2, 'HR', 1, 2);
+INSERT INTO Departments VALUES (3, 'Finance', 3, 1);
+INSERT INTO Departments VALUES (4, 'Marketing', 2, 3);
+INSERT INTO Departments VALUES (5, 'Sales', 1, 4);
+
+select * from Departments;
+
+INSERT INTO Locations VALUES (1, '123 Main St', '12345', 'New York', 'NY', 'USA');
+INSERT INTO Locations VALUES (2, '456 Elm St', '67890', 'Los Angeles', 'CA', 'USA');
+INSERT INTO Locations VALUES (3, '789 Oak St', '54321', 'Chicago', 'IL', 'USA');
+INSERT INTO Locations VALUES (4, '101 Pine St', '98765', 'Houston', 'TX', 'USA');
+INSERT INTO Locations VALUES (5, '202 Maple St', '13579', 'Phoenix', 'AZ', 'USA');
+
+select * from Locations;
+
+INSERT INTO Manager VALUES (1, 'Alice Johnson');
+INSERT INTO Manager VALUES (2, 'Bob Smith');
+INSERT INTO Manager VALUES (3, 'Charlie Brown');
+INSERT INTO Manager VALUES (4, 'Diana Prince');
+INSERT INTO Manager VALUES (5, 'Edward Norton');
+
+select * from Manager;
+
+
+-- solutions->
+--1.
+select * from Employee where salary > (select avg(salary) from Employee where dept_id = (select id from Departments where name = 'IT'));
+--2.
+select * from Employee where salary in (select min(salary) from Employee group by dept_id);
+--3.
+select e.id, e.fname, e.lname, e.salary, e.dept_id from Employee e where salary > (select avg(salary) from Employee e2 where e.dept_id = e2.dept_id group by e2.dept_id);
+--4.
+select d.name, m.name, l.city from Departments d join Manager m on d.manager_id = m.id join Locations l on d.location_id = l.id;
+--5.
+select * from Employee e join Manager m on e.id = m.id where trunc(months_between(sysdate, e.hire_date) / 12) > 4;
+
