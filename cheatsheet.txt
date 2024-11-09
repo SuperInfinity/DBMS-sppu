@@ -1,8 +1,19 @@
 1. raise_application_error(-20001, "msg");
 2. create or replace trigger trigger_name before/after update/delete on table_name
     for each row
-        declare
-            // code
-        begin
-            // code
-        end;
+    declare
+        <declaration>
+    begin
+        // code
+    end;
+3. create or replace procedure procedure_name(var1 in/out data_type) 
+    is <declaration>
+    begin 
+        //code
+    end;    
+4. create or replace function func_name (var1 in/out data_type) 
+    return data_type
+    is <declaration>
+    begin
+        // code
+    end;

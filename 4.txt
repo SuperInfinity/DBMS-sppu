@@ -1,0 +1,54 @@
+create table account(accno number primary key, name varchar(20), balance number, years int);
+create table earned_intrest(accno number primary key, intrst_amt number);
+
+-- Procesdure
+create or replace procedure calc_it(acno in number, rate in number) 
+is 
+	interst_amt number;
+	b number;
+	y int;
+begin
+	select account.balance into b from account where account.accno = acno;
+	select account.years into y from account where account.accno = acno;
+
+	interst_amt := round((b * rate * y) / 100, 2);
+	insert into earned_intrest values(acno, interst_amt);
+end;
+
+
+-- Function
+create or replace function displayit return int is
+begin
+    for r in (select * from account where balance > 50000) loop
+    	dbms_output.put_line('accno: ' || r.accno || ' name: ' || r.name || ' , balance: ' || r.balance);
+	end loop;
+	return 1;
+end;
+
+    
+insert into account values(1, 'tamm', 1222121, 12);
+insert into account values(2, 'qwedsa', 1231, 4);
+insert into account values(3, 'edawa', 3131, 10);
+insert into account values(4, 'duai', 13, 2);
+insert into account values(5, 'duai', 132, 2);
+insert into account values(6, 'duai', 13131, 2);
+
+
+declare
+    accno number;
+	rate number;
+	nothing int;
+
+begin
+    -- accno := &accno; this is how u take input in oracle developer from user i think!
+    -- rate := &rate; 
+    accno := 5;
+    rate := 2;
+    calc_it(accno, rate);
+    for rr in (select * from earned_intrest) loop
+        dbms_output.put_line('acc:' || rr.accno || ' , rate: '  || rr.intrst_amt);
+    end loop;
+
+	nothing := displayit();
+end;
+
