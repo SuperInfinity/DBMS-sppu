@@ -1,0 +1,8 @@
+1. raise_application_error(-20001, "msg");
+2. create or replace trigger trigger_name before/after update/delete on table_name
+    for each row
+        declare
+            // code
+        begin
+            // code
+        end;

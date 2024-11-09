@@ -1,0 +1,38 @@
+create table emp(id int primary key, name varchar(20), salary number, des varchar(20));
+create table backup(id int , olds number, news number, sdiff number);
+
+create or replace trigger ceo_things
+before delete on emp 
+for each row
+declare 
+	designation varchar(20);
+begin
+	if :old.des = 'ceo' then
+        RAISE_APPLICATION_ERROR(-20000, 'Cannot delete employee with designation CEO');
+	end if;
+end;
+
+create or replace trigger backitup 
+before update on emp 
+for each row
+declare
+    salarydiff number;
+begin
+    salarydiff := abs(:old.salary - :new.salary);
+    insert into backup values(:old.id, :old.salary, :new.salary, salarydiff);
+end;
+
+describe emp;
+
+insert into emp values(1, 'tamms', 100000, 'ceo');
+insert into emp values(2, 'aadas', 1, 'em');
+insert into emp values(3, 'wwda', 2331, 'man');
+insert into emp values(4, 'qqewqas', 31231, 'man');
+
+update emp set salary = 1000000 where des = 'ceo';
+
+select * from emp;
+select * from backup;
+
+delete from emp where des = 'ceo';
+
