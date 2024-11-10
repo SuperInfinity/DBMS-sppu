@@ -28,5 +28,6 @@ CREATE TABLE Account (
 );
 
 1. create index indx_name on Account(Account_no);
-2. create view view_name as select * from Customer where age < 45;
-3. 
+2. create view cus_info as select * from Account where CustID in (select CustID from Customer where age > 25);
+3. update cus_info set date_open = '2017-04-16';
+4. alter table Branch modify Branch_ID int auto_increment;
