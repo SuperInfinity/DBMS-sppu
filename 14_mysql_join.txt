@@ -1,0 +1,43 @@
+create table Employee(
+    id int primary key,
+    fname varchar(20),
+    lname varchar(20),
+    hire_date date,
+    salary int,
+    jobtitle varchar(20),
+    manager_id int,
+    dept_id int
+);
+
+create table Departments(
+    id int primary key,
+    name varchar(20),
+    manager_id int,
+    location_id int
+);
+
+create table Manager(
+    id int,
+    name varchar(20)
+);
+
+create table Locations(
+    id int primary key,
+    addr varchar(20),
+    postalcode varchar(20),
+    city varchar(20),
+    statee varchar(20),
+    country varchar(20)
+);
+
+--1.
+select * from Employee where salary > (select salary from Employee where lname = 'Smith');
+
+--2.
+select * from Employee where manager_id in (select manager_id from Departments where location_id in (select id from Locations where city = 'New York'));
+
+--3.
+select * from Employee join Manager on Employee.manager_id = Manager.id;
+
+--4.
+select * from Employee where hire_date > (select hire_date from Employee where fname = 'Michael');
