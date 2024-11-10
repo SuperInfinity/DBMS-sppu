@@ -1,0 +1,2 @@
+1. alter table Customer add mail_id varchar(20);
+2. alter table Customer rename mail_id to mail;

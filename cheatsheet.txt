@@ -32,3 +32,7 @@
 7. create table name as (select * from existing_table where <condn>);
 8. create index name on table(c1, c2); / drop index table.index;
 9. create view name as select * from table; / drop view name;
+10. alter table table_name rename column name to new_name;
+
+
+mongo --> (Aggregation & Indexing), (map reduce), (crud);

@@ -1,0 +1,20 @@
+create or replace trigger prevent
+before update on emp 
+for each row
+declare 
+begin
+	if :new.salary < :old.salary then
+        RAISE_APPLICATION_ERROR(-20000, 'Cannot redcuce the salary bitch!');
+	end if;
+end;
+
+
+create or replace trigger save_it
+before update on emp 
+for each row
+declare 
+begin
+	if :new.jobtitle != :old.jobtitle then
+        insert into histry_table values(:old.name, :old.jobtitle, :old.salary);
+	end if;
+end;
