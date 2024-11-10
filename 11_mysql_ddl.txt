@@ -1,0 +1,32 @@
+-- Create Customer Table
+CREATE TABLE Customer (
+    CustID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Cust_Address VARCHAR(255),
+    Phone_no VARCHAR(15),
+    Email_ID VARCHAR(100),
+    Age INT CHECK (Age >= 0)
+);
+
+-- Create Branch Table
+CREATE TABLE Branch (
+    Branch_ID INT PRIMARY KEY,
+    Branch_Name VARCHAR(100) NOT NULL,
+    Address VARCHAR(255)
+);
+
+-- Create Account Table
+CREATE TABLE Account (
+    Account_no INT PRIMARY KEY,
+    Branch_ID INT,
+    CustID INT,
+    date_open DATE,
+    Account_type VARCHAR(50),
+    Balance DECIMAL(10, 2),
+    foreign key (Branch_ID) references Branch(Branch_ID),
+    foreign key (CustID) references Customer(CustID)
+);
+
+1. create index indx_name on Account(Account_no);
+2. create view view_name as select * from Customer where age < 45;
+3. 

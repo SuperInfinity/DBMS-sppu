@@ -42,11 +42,11 @@ INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (4, 'North Branch', 
 INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (5, 'South Branch', '500 South St, Springfield');
 
 
-INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1001, 1, 1, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 'Savings', 1500.00);
-INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1002, 2, 2, TO_DATE('2023-02-20', 'YYYY-MM-DD'), 'Checking', 2500.00);
-INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1003, 3, 3, TO_DATE('2023-03-25', 'YYYY-MM-DD'), 'Savings', 3000.00);
-INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1004, 4, 4, TO_DATE('2023-04-30', 'YYYY-MM-DD'), 'Business', 5000.00);
-INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1005, 5, 5, TO_DATE('2023-05-10', 'YYYY-MM-DD'), 'Checking', 1200.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1001, 1, 1, '2023-01-15', 'Savings', 1500.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1002, 2, 2, '2023-02-20', 'Checking', 2500.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1003, 3, 3, '2023-03-25', 'Savings', 3000.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1004, 4, 4, '2023-04-30', 'Business', 5000.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1005, 5, 5, '2023-05-10', 'Checking', 1200.00);
 
 select * from Customer;
 select * from Branch;

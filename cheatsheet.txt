@@ -30,3 +30,5 @@
     end;
 6. alter table name add/modify/drop column_name data_type constrains;
 7. create table name as (select * from existing_table where <condn>);
+8. create index name on table(c1, c2); / drop index table.index;
+9. create view name as select * from table; / drop view name;
