@@ -1,0 +1,4 @@
+commands-->
+1. mongosh
+2. use db_name;
+3. db.mycoll.insertOne({//data});
