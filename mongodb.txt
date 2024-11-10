@@ -2,3 +2,46 @@ commands-->
 1. mongosh
 2. use db_name;
 3. db.mycoll.insertOne({//data});
+
+[
+    {
+        "Roll_No": 101,
+        "Name": "Alice Johnson",
+        "Class": "10th",
+        "Marks": 85,
+        "Address": "123 Maple Street, Springfield",
+        "Enrolled_Courses": ["Mathematics", "Science", "English"]
+    },
+    {
+        "Roll_No": 102,
+        "Name": "Bob Smith",
+        "Class": "10th",
+        "Marks": 78,
+        "Address": "456 Oak Avenue, Springfield",
+        "Enrolled_Courses": ["Mathematics", "History", "Art"]
+    },
+    {
+        "Roll_No": 103,
+        "Name": "Charlie Brown",
+        "Class": "9th",
+        "Marks": 92,
+        "Address": "789 Pine Road, Springfield",
+        "Enrolled_Courses": ["Science", "Mathematics", "Physical Education"]
+    },
+    {
+        "Roll_No": 104,
+        "Name": "Daisy Miller",
+        "Class": "9th",
+        "Marks": 88,
+        "Address": "321 Birch Lane, Springfield",
+        "Enrolled_Courses": ["English", "Mathematics", "Biology"]
+    },
+    {
+        "Roll_No": 105,
+        "Name": "Ethan Hunt",
+        "Class": "10th",
+        "Marks": 95,
+        "Address": "654 Cedar Boulevard, Springfield",
+        "Enrolled_Courses": ["Chemistry", "Mathematics", "History"]
+    }
+]
