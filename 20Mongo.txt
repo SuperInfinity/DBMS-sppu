@@ -1,0 +1,13 @@
+1. db.firstcollection.find({Enrolled_Courses: {$in: ['Mathematics', 'Chemistry']}});
+
+2. db.firstcollection.find({$or: [{Marks: {$gte: 50}}, {Class: '10th'}]}, {_id:0, Roll_No : 1, Class : 1});
+
+3. db.firstcollection.find({Enrolled_Courses: {$in: ['Mathematics', 'Chemistry']}});
+
+4. db.firstcollection.updateOne({Roll_NO: 104}, {$set: {Name: 'new name'}});
+
+5. db.firstcollection.find().sort({Marks:-1}).limit(3);
+
+6. db.firstcollection.find().sort({Marks: -1}).skip(2).limit(2);
+
+7. db.firstcollection.deleteMany({Marks: {$lt: 85}});
