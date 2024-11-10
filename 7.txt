@@ -16,7 +16,7 @@ INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (8, 
 INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (9, 'Adidas Ultraboost', 'Footwear', 179.99);
 INSERT INTO Products (Product_id, Product_Name, Product_Type, Price) VALUES (10, 'Philips Hue Bulb', 'Home Decor', 49.99);
 
-
+--1.
 declare 
 	id int;
 	name varchar(20);
@@ -33,6 +33,7 @@ begin
 	close cuss;
 end;
 
+--2.
 declare 
 	id int;
 	name varchar(20);
@@ -49,3 +50,19 @@ begin
 	end loop;
 	close cuss;
 end;
+
+
+--3.
+declare 
+	rows_affected int;
+begin 
+	update Products set Price = Price + 1000;
+	if sql%found then
+		rows_affected := sql%rowcount;
+        dbms_output.put_line('rows affecte are--> ' || rows_affected);
+	elsif sql%notfound then
+        dbms_output.put_line('NO rows affected!');
+	end if;
+end;
+
+select * from Products;
