@@ -3,7 +3,7 @@ create table Employee(
     fname varchar(20),
     lname varchar(20),
     hire_date date,
-    salary number,
+    salary int,
     jobtitle varchar(20),
     manager_id int,
     dept_id int
@@ -30,12 +30,12 @@ create table Locations(
     country varchar(20)
 );
 
-INSERT INTO Employee VALUES (1, 'John', 'Doe', TO_DATE('2020-01-15', 'YYYY-MM-DD'), 60000, 'Software Engineer', 3, 1);
-INSERT INTO Employee VALUES (2, 'Jane', 'Smith', TO_DATE('2019-03-22', 'YYYY-MM-DD'), 75000, 'Project Manager', 1, 2);
-INSERT INTO Employee VALUES (3, 'Emily', 'Johnson', TO_DATE('2021-07-10', 'YYYY-MM-DD'), 50000, 'Data Analyst', 3, 1);
-INSERT INTO Employee VALUES (4, 'Michael', 'Brown', TO_DATE('2018-05-30', 'YYYY-MM-DD'), 90000, 'Senior Developer', 2, 2);
-INSERT INTO Employee VALUES (5, 'Sarah', 'Davis', TO_DATE('2022-11-01', 'YYYY-MM-DD'), 55000, 'HR Specialist', 1, 3)
-INSERT INTO Employee VALUES (6, 'Saraasdah', 'Ddaavis', TO_DATE('2022-11-01', 'YYYY-MM-DD'), 55000, 'HR Specialist', 1, 3);
+INSERT INTO Employee VALUES (1, 'John', 'Doe', '2020-01-15', 60000, 'Software Engineer', 3, 1);
+INSERT INTO Employee VALUES (2, 'Jane', 'Smith', '2019-03-22', 75000, 'Project Manager', 1, 2);
+INSERT INTO Employee VALUES (3, 'Emily', 'Johnson', '2021-07-10', 50000, 'Data Analyst', 3, 1);
+INSERT INTO Employee VALUES (4, 'Michael', 'Brown', '2018-05-30', 90000, 'Senior Developer', 2, 2);
+INSERT INTO Employee VALUES (5, 'Sarah', 'Davis', '2022-11-01', 55000, 'HR Specialist', 1, 3)
+INSERT INTO Employee VALUES (6, 'Saraasdah', 'Ddaavis', '2022-11-01', 55000, 'HR Specialist', 1, 3);
 
 select * from Employee
 
@@ -74,5 +74,4 @@ select e.id, e.fname, e.lname, e.salary, e.dept_id from Employee e where salary 
 --4.
 select d.name, m.name, l.city from Departments d join Manager m on d.manager_id = m.id join Locations l on d.location_id = l.id;
 --5.
-select * from Employee e join Manager m on e.id = m.id where trunc(months_between(sysdate, e.hire_date) / 12) > 4;
-
+SELECT * FROM Employee e JOIN Manager m ON e.id = m.id WHERE FLOOR(datediff(SYSDATE(), e.hire_date) / 365) > 4;
