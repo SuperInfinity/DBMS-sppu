@@ -17,3 +17,16 @@
     begin
         // code
     end;
+5. declare
+        cursor cuss(a number) is select * from ... where .. x = a;
+    begin
+        open cuss(12)
+        loop    
+            fetch cuss into var1, var2;
+            exit when cuss%notfound;
+        --> print
+        end loop;
+        int x := cuss/sql%rowcount;
+    end;
+6. alter table name add/modify/drop column_name data_type constrains;
+7. create table name as (select * from existing_table where <condn>);

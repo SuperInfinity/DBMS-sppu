@@ -1,0 +1,75 @@
+-- Create Customer Table
+CREATE TABLE Customer (
+    CustID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Cust_Address VARCHAR(255),
+    Phone_no VARCHAR(15),
+    Email_ID VARCHAR(100),
+    Age INT CHECK (Age >= 0)
+);
+
+-- Create Branch Table
+CREATE TABLE Branch (
+    Branch_ID INT PRIMARY KEY,
+    Branch_Name VARCHAR(100) NOT NULL,
+    Address VARCHAR(255)
+);
+
+-- Create Account Table
+CREATE TABLE Account (
+    Account_no INT PRIMARY KEY,
+    Branch_ID INT,
+    CustID INT,
+    date_open DATE,
+    Account_type VARCHAR(50),
+    Balance DECIMAL(10, 2),
+    foreign key (Branch_ID) references Branch(Branch_ID),
+    foreign key (CustID) references Customer(CustID)
+);
+
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age) VALUES (1, 'John Doe', '123 Elm St, Springfield', '555-1234', 'john.doe@example.com', 30);
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age) VALUES (2, 'Jane Smith', '456 Oak St, Springfield', '555-5678', 'jane.smith@example.com', 25);
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age) VALUES (3, 'Alice Johnson', '789 Pine St, Springfield', '555-8765', 'alice.johnson@example.com', 40);
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age) VALUES (4, 'Bob Brown', '321 Maple St, Springfield', '555-4321', 'bob.brown@example.com', 35);
+INSERT INTO Customer (CustID, Name, Cust_Address, Phone_no, Email_ID, Age) VALUES (5, 'Charlie Davis', '654 Cedar St, Springfield', '555-7890', 'charlie.davis@example.com', 28);
+
+
+
+INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (1, 'Main Branch', '100 Main St, Springfield');
+INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (2, 'West Branch', '200 West St, Springfield');
+INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (3, 'East Branch', '300 East St, Springfield');
+INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (4, 'North Branch', '400 North St, Springfield');
+INSERT INTO Branch (Branch_ID, Branch_Name, Address) VALUES (5, 'South Branch', '500 South St, Springfield');
+
+
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1001, 1, 1, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 'Savings', 1500.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1002, 2, 2, TO_DATE('2023-02-20', 'YYYY-MM-DD'), 'Checking', 2500.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1003, 3, 3, TO_DATE('2023-03-25', 'YYYY-MM-DD'), 'Savings', 3000.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1004, 4, 4, TO_DATE('2023-04-30', 'YYYY-MM-DD'), 'Business', 5000.00);
+INSERT INTO Account (Account_no, Branch_ID, CustID, date_open, Account_type, Balance) VALUES (1005, 5, 5, TO_DATE('2023-05-10', 'YYYY-MM-DD'), 'Checking', 1200.00);
+
+select * from Customer;
+select * from Branch;
+select * from Account;
+
+--1.
+alter table Customer modify Email_ID varchar(50);
+
+--2.
+alter table Customer modify Email_ID varchar(50) not null;
+describe Customer;
+
+--3.
+select * from Customer where CustID in (select CustID from Account where Balance > 2000);
+
+--4.
+select avg(balance) as avg_bal from Account where Account_type = 'Savings';
+
+--5.
+select * from Customer where Cust_Address like '%Springfield%';
+
+--6.
+create table Savings_Accounts as (select * from Customer where CustID in (select CustID from Account where Account_type = 'Savings'));
+
+--7.
+select * from Customer where CustID in (select CustID from Account where balance > 2000) and age >= 20;
